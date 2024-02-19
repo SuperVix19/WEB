@@ -10,18 +10,21 @@ import { IphoneComponent } from './iphone/iphone.component';
 import { LaptopComponent } from './laptop/laptop.component';
 import { ParedComponent } from './pared/pared.component';
 import { SillaComponent } from './silla/silla.component';
+import { InicioComponent } from './inicio/inicio.component';
 
 
 export const routes: Routes = [
-    { path: 'categoria1', component: Categoria1Component, data: {breadcrumb: 'categoria1'} },
-    { path: 'carrito', component: CarritoComponent , data: {breadcrumb: 'carrito'} },  
-    { path: 'control', component: ControlComponent},
+    // { path: 'inicio', component: InicioComponent},
+    { path: 'categoria1', component: Categoria1Component },
+    { path: 'carrito', component: CarritoComponent },  
+    { path: 'control', component: ControlComponent},    
     { path: 'audifonos', component: AudifonosComponent},
     { path: 'corsair', component: CorsairComponent},
     { path: 'iphone', component: IphoneComponent},
     { path: 'laptop', component: LaptopComponent},
     { path: 'pared', component: ParedComponent},
     { path: 'silla', component: SillaComponent},
+    { path: '',  component: InicioComponent},
 
 
    

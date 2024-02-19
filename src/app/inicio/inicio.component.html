@@ -1,0 +1,128 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazona</title>
+
+</head>
+<body>
+    <header>
+        <h1>Amazona</h1> 
+        <input type="search" placeholder="Busqueda amazona.com" class="sb-search-input"> 
+        <input class="sb-search-submit" type="submit">
+        <span class="sb-icon-search"></span>
+    </header>
+
+    <!-- <nav>
+        <a href="#">Inicio</a>
+        <a routerLink="/categoria1">Monitores</a>
+        <a routerLink="/carrito">Carrito</a>
+    </nav> -->
+
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
+          <li class="breadcrumb-item"><a routerLink="/categoria1">Monitores</a></li>
+        </ol>
+    </nav>
+
+    <div class="container-fluid">        
+        <div class="seccion-productos">
+            <div class="row">
+                @for (item of productos; track $index) {
+                    <div class="col-xl-3">
+                        <div class="product">
+                            <h2 routerLink="/control">Xbox Elite Wireless Controller Series 2 Core – White </h2>
+                            <img routerLink="/control" src="https://m.media-amazon.com/images/I/61H321AbQuL._AC_UL320_.jpg" width="200">
+                
+                            <p>{{item.description}}</p>
+                            <p>Precio: {{item.price}}</p>
+                            <!-- <button>Añadir al carrito</button> -->
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3">
+                        <div class="product">
+                            <h2>ASTRO Gaming A50 Wireless</h2>
+                            <img routerLink="/audifonos" src="https://m.media-amazon.com/images/I/71kLaWND4qL._AC_SX342_.jpg" width="148">
+                            <p>{{item.description}}</p>
+                            <p>Precio: {{item.priceTwo}}</p>
+                            <!-- <button>Añadir al carrito</button> -->
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3">
+                        <div class="product">
+                            <h2>RIVTUN Kit de combinación de tablero de clavijas para organizador de pared </h2>
+                            <img routerLink="/pared" src="https://m.media-amazon.com/images/I/61kv9a-bgDL._AC_SX522_.jpg" width="100">
+                
+                            <p>{{item.description}}</p>
+                            <p>Precio: {{item.price}}</p>
+                            <!-- <button>Añadir al carrito</button> -->
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3">
+                        <div class="product">
+                            <h2>Corsair 4000D Airflow - Carcasa para PC </h2>
+                            <img routerLink="/corsair" src="https://m.media-amazon.com/images/I/51AAXV-ursL._AC_SX522_.jpg" width="120">
+                            
+                            <p>{{item.description}}</p>
+                            <p>Precio: {{item.priceTwo}}</p>
+                            <!-- <button>Añadir al carrito</button> -->
+                        </div>
+                    </div>    
+                }
+            </div>
+    
+            <div class="row">
+                @for (item of productos; track $index){
+
+                    <div class="col-xl-3">
+                        <div class="product">
+                            <h2>Apple iPhone 13, 128GB, Medianoche </h2>
+                            <img routerLink="/iphone" src="https://m.media-amazon.com/images/I/61BUt5ZErdL._AC_SX679_.jpg" width="133">
+                
+                            <p>{{item.description}}</p>
+                            <p>Precio: {{item.price}}</p>
+                            <!-- <button>Añadir al carrito</button> -->
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-3">
+                        <div class="product">
+                            <h2>Laptop HP Elitebook 830 G5</h2>
+                            <img routerLink="/laptop" src="https://m.media-amazon.com/images/I/81d5-+ukcTL._AC_SX679_.jpg" width="200">
+                            
+                            <p>{{item.description}}</p>
+                            <p>Precio: {{item.priceTwo}}</p>
+                            <!-- <button>Añadir al carrito</button> -->
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-3">
+                        <div class="product">
+                            <h2> SEATING Silla Oficina ejecutiva con cabecera y Soporte Lumbar  </h2>
+                            <img routerLink="/silla" src="https://m.media-amazon.com/images/I/81scLc-9ysL._AC_SY879_.jpg" width="80">
+                
+                            <p>{{item.description}}</p>
+                            <p>Precio: {{item.priceTwo}}</p>
+                            <!-- <button>Añadir al carrito</button> -->
+                        </div>
+                    </div>
+        
+                    <div class="col-xl-3">
+                        <div class="product">
+                            <h2> SEATING Silla Oficina ejecutiva con cabecera y Soporte Lumbar  </h2>
+                            <img routerLink="/silla" src="https://m.media-amazon.com/images/I/81scLc-9ysL._AC_SY879_.jpg" width="80">
+                
+                            <p>{{item.description}}</p>
+                            <p>Precio: {{item.price}}</p>
+                            <!-- <button>Añadir al carrito</button> -->
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</body>

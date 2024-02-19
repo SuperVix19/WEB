@@ -11,5 +11,6 @@ import { Categoria1Component } from './categoria1/categoria1.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'web';
+  
+
 }
