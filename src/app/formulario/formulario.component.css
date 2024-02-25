@@ -1,0 +1,126 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #b8b3b3;
+    overflow-x: hidden;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+}
+
+.sb-search-input{
+    padding: center;
+
+}
+
+nav {
+    background-color: #c9c6c6;
+    padding: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    margin-right: 10px;
+}
+
+.formulario-contacto{
+    background: #FFFFFF;
+    /* position: absolute; */
+    z-index: 2;
+    margin: 2rem 30rem;
+    border-radius: 50px;
+    padding: 3rem 3rem;
+    filter: drop-shadow(0px 0px 7px rgba(0, 0, 0, 0.2));
+}
+
+.formulario-contacto .titulo-formulario p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: #000000;
+    text-align: center;
+}
+
+.formulario-contacto .titulo-formulario p span{
+    color: #039F94;
+}
+
+.formulario-contacto .formulario{
+    padding-top: 3rem;
+}
+
+.formulario-contacto .formulario form{
+    width: 100%;
+}
+
+.mostrar .campos{
+    /* width: 100%; */
+    margin-bottom: 20px;
+    display: grid;
+    vertical-align: top;
+}
+
+.mostrar .campos input{
+    background: #F2F2F2;
+    border: 0;
+    height: 40px;
+    outline: none;
+    border-bottom: 2px solid #F2F2F2;
+}
+
+.mostrar .campos input::placeholder{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: #999999;
+    display: block;
+    margin-bottom: 0px;
+}
+
+.mostrar .campos input[type="text"]{
+    color: #000;
+}
+
+.mostrar .campos input[type="tel"]{
+    color: #000;
+}
+
+.mostrar .campos textarea{
+    background: #F2F2F2;
+    color: #000;
+    border: 0;
+    resize: none;
+    outline: none;
+    border-bottom: 2px solid #F2F2F2;
+}
+
+.mostrar .campos textarea::placeholder{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: #999999;
+    display: block;
+    margin-bottom: 0px;
+}
+
+.mostrar .form .boton-formulario{
+    padding-top: 3rem;
+}
+
+.mostrar .form .boton-formulario button{
+    background: #AE2C2B;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #ffff;
+    text-transform: uppercase;
+    border-radius: 50px;
+    padding: 14px 30px;
+    filter: drop-shadow(0px 0px 7px rgba(0, 0, 0, 0.5));
+}
+
+.mostrar .form .boton-formulario button:hover{
+    background: #ffff;
+    color: #AE2C2B;
+    border: 1px solid #AE2C2B;
+}

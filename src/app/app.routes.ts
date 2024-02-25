@@ -11,6 +11,7 @@ import { LaptopComponent } from './laptop/laptop.component';
 import { ParedComponent } from './pared/pared.component';
 import { SillaComponent } from './silla/silla.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { FormularioComponent } from './formulario/formulario.component';
 
 
 export const routes: Routes = [
@@ -25,10 +26,7 @@ export const routes: Routes = [
     { path: 'pared', component: ParedComponent},
     { path: 'silla', component: SillaComponent},
     { path: '',  component: InicioComponent},
-
-
-   
-
+    { path: 'formulario',  component: FormularioComponent},
 ];
 
 @NgModule({
