@@ -56,3 +56,16 @@ nav a {
     padding: 10px;
     background-color: #f0f0f0;
 }
+
+.product {
+    transition: transform 0.3s ease-in-out;
+}
+
+.product:hover {
+    transform: translateY(-5px); /* Movimiento hacia arriba al pasar el mouse */
+}
+
+/* Opcional: Efecto de sombra en los productos */
+.product {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
