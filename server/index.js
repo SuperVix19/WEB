@@ -10,7 +10,7 @@ app.use(cors({
 
 app.use(express.json());
 
-use.use('/api', require('./routes/index'));
+app.use('/api', require('./routes/index'));
 
 app.listen(3000);
-
+console.log('listening on port', 3000);

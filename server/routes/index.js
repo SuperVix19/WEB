@@ -2,10 +2,8 @@ const { Router } = require('express');
 const router = Router();
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
 const Cryptr = require('cryptr');
-const Cryptr = new Cryptr('palabraSecreta');
+const cryptr = new Cryptr('palabraSecreta');
 
 router.get('/', (req, res) => res.send('Hello World'));
 
