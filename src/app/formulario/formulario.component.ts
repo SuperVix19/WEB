@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Employee } from '../models/employee/employee';
 
 @Component({
   selector: 'app-formulario',
