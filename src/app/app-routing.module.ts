@@ -10,10 +10,10 @@ import { LaptopComponent } from './laptop/laptop.component';
 import { ParedComponent } from './pared/pared.component';
 import { SillaComponent } from './silla/silla.component';
 import { InicioComponent } from './inicio/inicio.component';
-import { FormularioComponent } from './formulario/formulario.component';
+import { RegistroComponent } from './registro/registro.component';
+import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 
 const routes: Routes = [
-  // { path: 'inicio', component: InicioComponent},
   { path: 'categoria1', component: Categoria1Component },
   { path: 'carrito', component: CarritoComponent },  
   { path: 'control', component: ControlComponent},    
@@ -24,7 +24,8 @@ const routes: Routes = [
   { path: 'pared', component: ParedComponent},
   { path: 'silla', component: SillaComponent},
   { path: '',  component: InicioComponent},
-  { path: 'formulario',  component: FormularioComponent},
+  { path: 'registro',  component: RegistroComponent},
+  { path: 'inicio-sesion',  component: InicioSesionComponent},
 ];
 
 @NgModule({

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AppModule } from '../app.module';
 
 @Component({
   selector: 'app-inicio',
-  standalone: true,
-  imports: [RouterModule],
+  standalone: false,
+  // imports: [RouterModule, AppModule],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css'
 })

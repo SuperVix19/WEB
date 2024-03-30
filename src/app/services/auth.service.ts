@@ -1,5 +1,11 @@
 import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+
+
+@Injectable({
+  providedIn: 'root'
+})
 
 
 export class AuthService {
@@ -26,7 +32,7 @@ export class AuthService {
 
   singOut(){
     localStorage.removeItem('token');
-    this.router.navigate(['/inicio']);
+    this.router.navigate(['/inicio-sesion']);
   }
 
 }
