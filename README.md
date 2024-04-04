@@ -10,6 +10,9 @@
 
 IDGS81N
 
+# PD:
+
+Profe, seguimos trabajando en los detalles, para mejorar la aplicación. Ya son pocos, le agradecemos si nos da un poquito de chanza.
 
 # Web
 
