@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppModule } from '../app.module';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-inicio',
@@ -9,7 +10,11 @@ import { AppModule } from '../app.module';
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css'
 })
-export class InicioComponent {
+export class InicioComponent implements OnInit{
+
+  constructor(private authService: AuthService){}
+
+  ngOnInit(): void {}
 
   title = 'web';
 
@@ -20,5 +25,13 @@ export class InicioComponent {
       priceTwo: '$39.99'
     }
   ]
+
+  loggedIn(){
+    this.authService.loggedIn();
+  }
+
+  singOut(){
+    this.authService.singOut
+  }
 
 }

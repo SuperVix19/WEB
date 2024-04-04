@@ -1,1 +1,51 @@
-<p>inicio-sesion works!</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazona</title>
+
+</head>
+<body>
+    <header>
+        <h1>Amazona</h1> 
+        <input type="search" placeholder="Busqueda amazona.com" class="sb-search-input"> 
+        <input class="sb-search-submit" type="submit">
+        <span class="sb-icon-search"></span>
+    </header>
+
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
+            <li class="breadcrumb-item"><a routerLink="/categoria1">Monitores</a></li>
+            <li class="breadcrumb-item"><a routerLink="/inicio-sesion">Iniciar sesión</a></li>
+            <li class="breadcrumb-item"><a routerLink="/registro">Regístrate</a></li>
+        </ol>
+    </nav>
+
+    <div class="row formulario-contacto">
+        <div class="titulo-formulario col-xl-12">
+            <h1>Inicar sesión</h1>
+        </div>
+    
+        <div class="formulario col-xl-12">
+            <div class="mostrar">
+                <form id="contact-form" (submit)="logIn()" action="" method="post">
+                    <div class="form">
+                        <div class="mb-4 campos">
+                            <input type="email" [(ngModel)]="user.email" id="email" name="email" placeholder="Email" required>
+                        </div>
+
+                        <div class="mb-4 campos">
+                            <input type="password" [(ngModel)]="user.password" id="password" name="password" placeholder="Contraseña" required>
+                        </div>
+      
+                        <div class="boton-formulario d-flex justify-content-center">
+                          <button type="submit" class="btn">Enviar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+

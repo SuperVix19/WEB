@@ -12,43 +12,46 @@
         <span class="sb-icon-search"></span>
     </header>
 
-    <!-- <nav>
-        <a href="#">Inicio</a>
-        <a routerLink="/categoria1">Monitores</a>
-        <a routerLink="/carrito">Carrito</a>
-    </nav> -->
-
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
-          <li class="breadcrumb-item"><a routerLink="/categoria1">Monitores</a></li>
-          <li class="breadcrumb-item"><a routerLink="/formulario">Formulario</a></li>
+            <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
+            <li class="breadcrumb-item"><a routerLink="/categoria1">Monitores</a></li>
+            <li class="breadcrumb-item"><a routerLink="/inicio-sesion">Iniciar sesión</a></li>
+            <li class="breadcrumb-item"><a routerLink="/registro">Regístrate</a></li>
         </ol>
     </nav>
 
     <div class="row formulario-contacto">
         <div class="titulo-formulario col-xl-12">
-            <p>Regístrate</p>
+            <h1>Regístrate</h1>
         </div>
     
         <div class="formulario col-xl-12">
             <div class="mostrar">
-                <form id="contact-form" action="" method="post">
+                <form id="contact-form" (submit)="register()" action="" method="post">
                     <div class="form">
                         <div class="mb-4 campos">
-                            <input type="text" id="name" name="name" placeholder="Nombre" required>
+                            <input type="text" [(ngModel)]="user.name" id="name" name="name" placeholder="Nombre" required>
                         </div>
         
                         <div class="mb-4 campos">
-                            <input type="email" id="email" name="email" placeholder="Email" required>
+                            <input type="email" [(ngModel)]="user.email" id="email" name="email" placeholder="Email" required>
                         </div>
     
                         <div class="mb-4 campos">
-                            <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Celular" required>
+                            <input type="tel" [(ngModel)]="user.phoneNumber" id="phoneNumber" name="phoneNumber" placeholder="Celular" required>
                         </div>
 
                         <div class="mb-4 campos">
-                            <input type="password" id="password" name="password" placeholder="Contraseña" required>
+                            <select class="form-select" aria-label="Seleccione una opción" aria-placeholder="Seleccione una opción">
+                                <option selected>Seleccione una opción</option>
+                                <option value="admin">Administrador</option>
+                                <option value="cliente">Cliente</option>
+                              </select>
+                        </div>
+
+                        <div class="mb-4 campos">
+                            <input type="password" [(ngModel)]="user.password" id="password" name="password" placeholder="Contraseña" required>
                         </div>
       
                         <div class="boton-formulario d-flex justify-content-center">

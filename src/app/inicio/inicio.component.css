@@ -36,6 +36,10 @@ nav a {
     padding: 20px;
 } */
 
+.sin-padding{
+    padding: 0;
+}
+
 .product {
     background-color: #fff;
     border: 1px solid #ffffff;

@@ -37,15 +37,11 @@ nav a {
     filter: drop-shadow(0px 0px 7px rgba(0, 0, 0, 0.2));
 }
 
-.formulario-contacto .titulo-formulario p{
+.formulario-contacto .titulo-formulario h1{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
     color: #000000;
     text-align: center;
-}
-
-.formulario-contacto .titulo-formulario p span{
-    color: #039F94;
 }
 
 .formulario-contacto .formulario{
@@ -104,12 +100,18 @@ nav a {
     margin-bottom: 0px;
 }
 
+.form-select:focus {
+    border-color: #999999;
+    outline: 0;
+    box-shadow: none;
+}
+
 .mostrar .form .boton-formulario{
     padding-top: 3rem;
 }
 
 .mostrar .form .boton-formulario button{
-    background: #AE2C2B;
+    background: #b8b3b3;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     color: #ffff;
@@ -121,6 +123,6 @@ nav a {
 
 .mostrar .form .boton-formulario button:hover{
     background: #ffff;
-    color: #AE2C2B;
-    border: 1px solid #AE2C2B;
+    color: #000;
+    border: 1px solid #b8b3b3;
 }
