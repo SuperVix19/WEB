@@ -1,18 +1,22 @@
 const { Router } = require('express');
 const router = Router();
 const User = require('../models/user');
+const Product = require('../models/product');
 const jwt = require('jsonwebtoken');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('palabraSecreta');
 const nodemailer = require('nodemailer');
 
-function authorize(roles) {
+function authorizeAdmin(roles) {
     return function(req, res, next) {
         const token = req.headers.authorization;
-
         jwt.verify(token, 'palabraSecreta', (err, decoded) => {
-        req.user = decoded;
-        next();
+            if (err) return res.status(401).send('Token invalido');
+
+            if (!roles.includes(decoded.userRole)) return res.status(403).send('No tienes permisos');
+
+            req.user = decoded;
+            next();
         });
     };
 }
@@ -100,6 +104,41 @@ router.post('/reset-password' , async (req, res) =>{
     await user.save();
 
     return res.status(200).send('Contraseña actualizada correctamente');
+});
+
+router.get('/products', authorizeAdmin(['admin']), async (req, res) => {
+    const products = await Product.find();
+    return res.status(200).json(products);
+});
+  
+router.post('/products/add', authorizeAdmin(['admin']),async (req, res) => {
+    const {name, price, description, imageLink} = req.body;
+
+    const newProduct = new Product({name, price, description, imageLink});
+    
+    await newProduct.save();
+    return res.status(200).json(newProduct);
+});
+
+
+router.delete('/product/:id', authorizeAdmin(['admin']),async (req, res) => {
+    const product = await Product.findOne({_id: req.params.id});
+
+    if (!product) return res.status(404).send('No existe el producto');
+
+    await product.deleteOne();
+
+    return res.status(200).send("Producto eliminado");
+});
+
+router.put('/product/:id', authorizeAdmin(['admin']),async (req, res) => {
+    const product = await Product.findOne({_id: req.params.id});
+
+    if (!product) res.status(404).send('No existe el producto');
+
+    await product.updateOne(req.body);
+
+    return res.status(200).json("Producto actualizado");
 });
 
 module.exports = router;
