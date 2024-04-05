@@ -8,7 +8,7 @@ const cryptr = new Cryptr('palabraSecreta');
 router.get('/', (req, res) => res.send('Hello World'));
 
 router.post('/register', async (req, res) =>{
-    const {name, email, phoneNumber, password } = req.body;
+    const {name, email, phoneNumber, role, password } = req.body;
 
     const checkUser = await User.findOne({email});
 
@@ -16,7 +16,7 @@ router.post('/register', async (req, res) =>{
 
     if(checkUser) return res.status(401).send("Correo ya esta registrado");
 
-    const newUser = new User({name, email, phoneNumber, password: encryptedString});
+    const newUser = new User({name, email, phoneNumber, role, password: encryptedString});
     await newUser.save();
 
     const token = jwt.sign({_id: newUser._id}, 'palabraSecreta');

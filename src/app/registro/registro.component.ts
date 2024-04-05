@@ -47,6 +47,7 @@ export class RegistroComponent implements OnInit {
     name: '',
     email: '',
     phoneNumber: '',
+    role: '',
     password: '',
   }
 
@@ -60,6 +61,7 @@ export class RegistroComponent implements OnInit {
       name: [this.user.name, Validators.required],
       email: [this.user.email, Validators.required],
       phoneNumber: [this.user.phoneNumber, [Validators.required]],
+      role: [this.user.role, Validators.required],
       password: [this.user.password, [Validators.required, Validators.min(10)]]
     })
 
@@ -81,7 +83,7 @@ export class RegistroComponent implements OnInit {
       return
     }
 
-    if (miFormulario.value.name == "" || miFormulario.value.email == "" || miFormulario.value.phoneNumber == "" || miFormulario.value.password == ""){
+    if (miFormulario.value.name == "" || miFormulario.value.email == "" || miFormulario.value.phoneNumber == "" || miFormulario.value.role == "" || miFormulario.value.password == ""){
       Swal.fire(
         'Ingrese todos los campos',
         'Llene y/o seleccione todos los campos obligatorios',
