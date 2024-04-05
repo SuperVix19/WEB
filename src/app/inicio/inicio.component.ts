@@ -30,8 +30,16 @@ export class InicioComponent implements OnInit{
     this.authService.loggedIn();
   }
 
-  singOut(){
-    this.authService.singOut
+  signOut(){
+    this.authService.signOut();
+  }
+
+  userIsAdmin(){
+    return this.authService.userIsAdmin();
+  }
+
+  userIsCliente(){
+    return this.authService.userIsCliente();
   }
 
 }

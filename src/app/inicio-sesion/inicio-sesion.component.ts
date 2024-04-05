@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import Swal from 'sweetalert2';  
+import Swal from 'sweetalert2';
+import { CookieService } from 'ngx-cookie-service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -10,36 +12,36 @@ import Swal from 'sweetalert2';
   styleUrl: './inicio-sesion.component.css'
 })
 
-export class InicioSesionComponent implements OnInit{
+export class InicioSesionComponent implements OnInit {
 
   user = {
     email: '',
     password: '',
   }
 
-  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder){}
+  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder, private cookieService: CookieService) { }
 
   ngOnInit(): void {
-    
+
   }
 
-  logIn(){
+  logIn() {
     var miFormulario = this.formBuilder.group({
       email: [this.user.email, [Validators.required, Validators.email]],
       password: [this.user.password, [Validators.required, Validators.min(10)]]
     })
 
-    if (miFormulario.value.email == "" || miFormulario.value.password == ""){
+    if (miFormulario.value.email == "" || miFormulario.value.password == "") {
       Swal.fire(
         'Ingrese todos los campos',
         'Llene y/o seleccione todos los campos obligatorios',
         'warning'
-        )
+      )
     } else {
       this.authService.logIn(this.user).subscribe(
         {
           error: (err: any) => {
-            if (err?.error === "El correo no existe") {
+            if (err?.error === "El usuario no esta registrado") {
               Swal.fire(
                 'Correo no existente',
                 'El correo no se encuentra registado',
@@ -55,12 +57,40 @@ export class InicioSesionComponent implements OnInit{
             }
           },
           next: (res: any) => {
-            localStorage.setItem('token', res.token);
-            this.router.navigate(['/inicio']);
+            this.cookieService.set('token', res.token);
+            this.cookieService.set('userRole', res.userRole);
+            this.router.navigate(['/']);
           },
         }
       )
     }
+  }
+
+  //pendiente configurar
+  resetPasswordModal() {
+    Swal.fire({
+      title: 'Ingrese su correo',
+      input: 'email',
+      inputLabel: 'Correo',
+      inputPlaceholder: 'Ingrese su correo',
+      showCancelButton: true,
+      confirmButtonText: 'Enviar',
+      showLoaderOnConfirm: true,
+      preConfirm: (email) => {
+        return this.authService.requestPasswordReset(email)
+          .subscribe({
+            error: (error) => {
+              Swal.showValidationMessage(
+                `Solicitud fallida: ${error}`
+              )
+            },
+            next: (response) => {
+              console.log('%c⧭', 'color: #1d5673', response);
+            },
+          })
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    })
   }
 
 }

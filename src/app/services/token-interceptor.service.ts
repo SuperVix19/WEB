@@ -6,13 +6,15 @@ import { AuthService } from "./auth.service";
 })
 
 export class TokenInterceptorService {
-  
-    constructor(private authService: AuthService){}
 
-    intercept(req: any, next: any){
-        const tokenizeReq = req.clone({setHeaders: {Authorization: `Bearer ${this.authService.getToken()}`}});
+    constructor(private authService: AuthService) { }
 
-        return next.handle(tokenizeReq);
+    intercept(req: any, next: any) {
+        const tokenizeReq = req.clone({ setHeaders: { Authorization: `Bearer ${this.authService.getToken()}` } });
+
+        const setRoleReq = req.clone({ setHeaders: { userRole: `${this.authService.getUserRole()}` } });
+
+        return next.handle(tokenizeReq, setRoleReq);
     }
 
 }

@@ -18,8 +18,13 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
             <li class="breadcrumb-item"><a routerLink="/categoria1">Monitores</a></li>
-            <li class="breadcrumb-item"><a (click)="singOut()">Cerrar sesión</a></li>
+            <li class="breadcrumb-item"><a style="cursor: pointer;" (click)="signOut()">Cerrar sesión</a></li>
         </ol>
+
+        <!-- en progreso -->
+        @if (userIsAdmin()) {
+            <button type="button">Agregar producto</button>
+        }
     </nav>
 
     <div class="container-fluid sin-padding">     
@@ -150,6 +155,7 @@
             </div>
         </div>
     </div>
+</body>
 
     
 <!-- <script>

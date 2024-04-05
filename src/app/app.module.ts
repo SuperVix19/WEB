@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
+import {CookieService} from 'ngx-cookie-service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
   providers: [
     AuthService,
     AuthGuard,
+    CookieService,
 
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi : true}
   ],

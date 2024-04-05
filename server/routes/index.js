@@ -6,6 +6,17 @@ const Cryptr = require('cryptr');
 const cryptr = new Cryptr('palabraSecreta');
 const nodemailer = require('nodemailer');
 
+function authorize(roles) {
+    return function(req, res, next) {
+        const token = req.headers.authorization;
+
+        jwt.verify(token, 'palabraSecreta', (err, decoded) => {
+        req.user = decoded;
+        next();
+        });
+    };
+}
+
 router.get('/', (req, res) => res.send('Hello World'));
 
 router.post('/register', async (req, res) =>{
@@ -20,8 +31,8 @@ router.post('/register', async (req, res) =>{
     const newUser = new User({name, email, phoneNumber, role, password: encryptedString, resetCode: null});
     await newUser.save();
 
-    const token = jwt.sign({_id: newUser._id}, 'palabraSecreta');
-    return res.status(200).json({token});
+    const token = jwt.sign({id: newUser._id, userRole: newUser.role}, 'palabraSecreta');
+    return res.status(200).json({ token, userRole: newUser.role });
 })
 
 router.post('/signin', async (req, res) =>{
@@ -32,8 +43,8 @@ router.post('/signin', async (req, res) =>{
 
     if (password != cryptr.decrypt(user.password)) return res.status(401).send('Contraseña incorrecta');
 
-    const token = jwt.sign({_id: user._id}, 'palabraSecreta');
-    return res.status(200).json({token});
+    const token = jwt.sign({id: user._id, userRole: user.role}, 'palabraSecreta');
+    return res.status(200).json({ token, userRole: user.role });
 })
 
 router.post('/request-password-reset', async (req, res) => {
@@ -74,7 +85,7 @@ router.post('/request-password-reset', async (req, res) => {
     });
 });
 
-router.post('/recover-password' , async (req, res) =>{
+router.post('/reset-password' , async (req, res) =>{
     const {email, resetCode, newPassword} = req.body;
     const user = await User.findOne({email});
 
