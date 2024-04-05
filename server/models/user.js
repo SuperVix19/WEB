@@ -20,12 +20,18 @@ const userSchema = new Schema({
         type: String,
         required: true,
         enum: ['admin', 'cliente'],
+        default: 'cliente',
     },
     password: {
         type: String,
         required: true,
         minLength: 10
     },
+    resetCode: {
+        type: Number,
+        required: false,
+        minLength: 7
+    }
 }, 
 {
     timestamps: true 
