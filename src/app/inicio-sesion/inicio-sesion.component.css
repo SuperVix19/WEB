@@ -126,3 +126,7 @@ nav a {
     color: #000;
     border: 1px solid #b8b3b3;
 }
+
+.recuperar-password a{
+    cursor: pointer;
+}
