@@ -12,6 +12,7 @@ import { SillaComponent } from './silla/silla.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { RegistroComponent } from './registro/registro.component';
 import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
+import { ProductoComponent } from './producto/producto.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: '',  component: InicioComponent, canActivate: [AuthGuard]},
   { path: 'registro',  component: RegistroComponent},
   { path: 'inicio-sesion',  component: InicioSesionComponent},
+  { path: 'producto', component: ProductoComponent},
 ];
 
 @NgModule({

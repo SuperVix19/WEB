@@ -1,0 +1,66 @@
+
+<body>
+ 
+    <div class="breadcrumbs">
+        <a href="#">Inicio</a> &gt; <a href="#">Producto </a> &gt; <span>{{this.oldProduct.name}}</span>
+    </div>
+
+    <div class="content">
+        <h2>{{this.oldProduct.name}}</h2>
+          <img src="{{this.oldProduct.imageLink}}" alt="">
+        <p >{{this.oldProduct.description}}</p>
+        <p>Precio: ${{this.oldProduct.price}}</p>
+
+        @if (userIsAdmin()) {
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProductModal">
+                Editar
+            </button>
+            <button type="button" class="btn btn-danger" (click)="deleteProduct()">
+                Eliminar
+            </button>
+
+            <!-- Edit Product Modal -->
+            <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="editProductModalLabel">Editar producto</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <form id="new-product-form" action="" method="post" (submit)="editProduct()">
+                                <div class="form-floating mb-3">
+                                    <input type="text" [(ngModel)]="product.name" id="name" name="name" class="form-control" id="floatingInput" placeholder="Nombre del Producto">
+                                    <label for="floatingInput">Nombre del Producto</label>
+                                </div>
+                                
+                                <div class="form-floating mb-3">
+                                    <input type="url" [(ngModel)]="product.imageLink" id="imageLink" name="imageLink" class="form-control" id="floatingInput" placeholder="Descripción">
+                                    <label for="floatingInput">Imagen</label>
+                                </div>
+                                
+                                <div class="form-floating mb-3">
+                                    <input type="text" [(ngModel)]="product.description" id="description" name="description" class="form-control" id="floatingInput" placeholder="Descripción">
+                                    <label for="floatingInput">Descripción</label>
+                                </div>
+                                
+                                <div class="form-floating mb-3">
+                                    <input type="number" [(ngModel)]="product.price" id="price" name="price" class="form-control" id="floatingInput" placeholder="Precio">
+                                    <label for="floatingInput">Precio</label>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+
+</body>

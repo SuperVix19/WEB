@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import Swal from 'sweetalert2';
 import { CookieService } from 'ngx-cookie-service';
-import { error } from 'console';
 
+declare var $: any;
 @Component({
   selector: 'app-inicio-sesion',
   templateUrl: './inicio-sesion.component.html',
@@ -18,6 +18,13 @@ export class InicioSesionComponent implements OnInit {
     email: '',
     password: '',
   }
+
+  emailToRestorePassword = '';
+  sentCode = false;
+  newPassword = '';
+  resetErrorMessage = '';
+  resetCode = undefined;
+  newPasswordError = '';
 
   constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder, private cookieService: CookieService) { }
 
@@ -66,31 +73,75 @@ export class InicioSesionComponent implements OnInit {
     }
   }
 
-  //pendiente configurar
-  resetPasswordModal() {
-    Swal.fire({
-      title: 'Ingrese su correo',
-      input: 'email',
-      inputLabel: 'Correo',
-      inputPlaceholder: 'Ingrese su correo',
-      showCancelButton: true,
-      confirmButtonText: 'Enviar',
-      showLoaderOnConfirm: true,
-      preConfirm: (email) => {
-        return this.authService.requestPasswordReset(email)
-          .subscribe({
-            error: (error) => {
-              Swal.showValidationMessage(
-                `Solicitud fallida: ${error}`
-              )
-            },
-            next: (response) => {
-              console.log('%c⧭', 'color: #1d5673', response);
-            },
+  isStrongPassword = (password: string) => {
+
+    // Check for at least 10 characters
+    if (password.length < 10) {
+      return false;
+    }
+  
+    // Check for at least one digit (number)
+    if (!/\d/.test(password)) {
+      return false;
+    }
+  
+    // Check for at least one special character
+    if (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password)) {
+      return false;
+    }
+  
+    // Check for at least one uppercase letter
+    if (!/[A-Z]/.test(password)) {
+      return false;
+    }
+  
+    // If all checks pass, the password is strong
+    return true;
+  }
+  requestPasswordReset() {
+    this.authService.requestPasswordReset(this.emailToRestorePassword).subscribe(
+      {
+        error: (err: any) => {
+          this.resetErrorMessage = err.error;
+        },
+        next: (res: any) => {
+          this.sentCode = true;
+        },
+      }
+    )
+  }
+
+  resetPassword() {
+    this.resetErrorMessage = '';
+    this.newPasswordError = '';
+    if (!this.isStrongPassword(this.newPassword)) {
+      this.newPasswordError = 'La contraseña debe tener al menos 10 caracteres, un número, un carácter especial y una letra mayúscula';
+      return;
+    }
+    this.authService.resetPassword(this.emailToRestorePassword, this.newPassword, this.resetCode).subscribe(
+      {
+        error: (err: any) => {
+          this.resetErrorMessage = err.error;
+        },
+        next: (res: any) => {
+          $('#resetPasswordModal').modal('hide');
+          Swal.fire(
+            'Contraseña actualizada',
+            'La contraseña se ha actualizado correctamente',
+            'success'
+          ).then((result) => {
+            if (result.isConfirmed) {
+              this.resetErrorMessage = '';
+              this.newPasswordError = '';
+              this.emailToRestorePassword = '';
+              this.newPassword = '';
+              this.resetCode = undefined;
+              this.sentCode = false;
+            }
           })
-      },
-      allowOutsideClick: () => !Swal.isLoading()
-    })
+        },
+      }
+    )
   }
 
 }

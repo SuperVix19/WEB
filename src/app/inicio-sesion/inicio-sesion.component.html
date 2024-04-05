@@ -45,8 +45,72 @@
                 </form>
             </div>
 
-            <div class="recuperar-password d-flex justify-content-center pt-5">
-                <a (click)="resetPasswordModal()">¿Olvidaste tu contraseña?</a>
+             <!-- Button trigger modal -->
+             <button type="button" class="btn recuperar-password d-flex justify-content-center mt-4" data-bs-toggle="modal" data-bs-target="#resetPasswordModal">
+                ¿Olvidaste tu contraseña?
+            </button>
+        </div>
+    </div>
+    <!-- Add Product Modal -->
+    <div class="modal fade" id="resetPasswordModal" tabindex="-1" aria-labelledby="resetPasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="resetPasswordModalLabel">Recuperar contraseña</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    @if (!sentCode) {
+                        <form id="reset-password-form" autocomplete="on" action="" method="post" (submit)="requestPasswordReset()">
+                            <div class="form-floating mb-3">
+                                <input type="email" autocomplete="email" [(ngModel)]="emailToRestorePassword" disabled="{{sentCode}}" id="emailToRestore" name="emailToRestore" class="form-control" placeholder="Email">
+                                <label for="emailToRestore">Email</label>
+
+                                <div class="alert alert-danger mt-2" role="alert" *ngIf="resetErrorMessage">
+                                    {{resetErrorMessage}}
+                                </div>
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Enviar</button>
+                            </div>
+                        </form>
+                    } @else {
+                        <form id="reset-password-form" action="" method="post" (submit)="resetPassword()">
+                            <div class="alert alert-success mt-2" role="alert">
+                                Código enviado a tu correo
+                            </div>
+                            
+                            <div class="form-floating mb-3">
+                                <input autocomplete="one-time-code" maxlength="7" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" [(ngModel)]="resetCode" disabled="{{!sentCode}}" id="resetCode" name="resetCode" class="form-control" placeholder="Código de recuperación">
+                                <label for="resetCode">Código de recuperación</label>
+                            </div>
+                            
+                            <div class="alert alert-danger mt-2" role="alert" *ngIf="resetErrorMessage">
+                                {{resetErrorMessage}}
+                            </div>
+                            
+
+                            <div class="form-floating mb-3">
+                                <input type="password" [(ngModel)]="newPassword" autocomplete="new-password" disabled="{{!sentCode}}" id="newPassword" name="newPassword" class="form-control" placeholder="Nueva contraseña">
+                                <label for="newPassword">Nueva contraseña</label>
+                            </div>
+                            
+
+                            <div class="alert alert-danger mt-2" role="alert" *ngIf="newPasswordError">
+                                {{newPasswordError}}
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Enviar</button>
+                            </div>
+                            
+                        </form>
+                    }                            
+                </div>
             </div>
         </div>
     </div>

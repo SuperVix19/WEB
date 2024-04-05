@@ -9,7 +9,7 @@ const nodemailer = require('nodemailer');
 
 function authorizeAdmin(roles) {
     return function(req, res, next) {
-        const token = req.headers.authorization;
+        const token = req.headers.authorization ? req.headers.authorization.split(' ')[1] : null;
         jwt.verify(token, 'palabraSecreta', (err, decoded) => {
             if (err) return res.status(401).send('Token invalido');
 
@@ -87,6 +87,8 @@ router.post('/request-password-reset', async (req, res) => {
             return res.status(200).send('Correo enviado correctamente');
         }
     });
+
+    return res.status(200).send({resetCode, email});
 });
 
 router.post('/reset-password' , async (req, res) =>{
@@ -95,7 +97,7 @@ router.post('/reset-password' , async (req, res) =>{
 
     if (!user) return res.status(401).send('El usuario no esta registrado');
 
-    if (resetCode != user.resetCode) return res.status(401).send('Código de verificación incorrecto');
+    if (resetCode != user.resetCode) return res.status(401).send('Codigo de verificacion incorrecto');
 
     const encryptedString = cryptr.encrypt(newPassword);
     user.password = encryptedString;
@@ -103,15 +105,15 @@ router.post('/reset-password' , async (req, res) =>{
 
     await user.save();
 
-    return res.status(200).send('Contraseña actualizada correctamente');
+    return res.status(200).json(user);
 });
 
-router.get('/products', authorizeAdmin(['admin']), async (req, res) => {
+router.get('/products', authorizeAdmin(['admin', 'cliente']), async (req, res) => {
     const products = await Product.find();
     return res.status(200).json(products);
 });
   
-router.post('/products/add', authorizeAdmin(['admin']),async (req, res) => {
+router.post('/products/add', authorizeAdmin(['admin']), async (req, res) => {
     const {name, price, description, imageLink} = req.body;
 
     const newProduct = new Product({name, price, description, imageLink});
@@ -121,24 +123,24 @@ router.post('/products/add', authorizeAdmin(['admin']),async (req, res) => {
 });
 
 
-router.delete('/product/:id', authorizeAdmin(['admin']),async (req, res) => {
+router.delete('/product/:id', authorizeAdmin(['admin']), async (req, res) => {
     const product = await Product.findOne({_id: req.params.id});
 
     if (!product) return res.status(404).send('No existe el producto');
 
     await product.deleteOne();
 
-    return res.status(200).send("Producto eliminado");
+    return res.status(200).json(product);
 });
 
-router.put('/product/:id', authorizeAdmin(['admin']),async (req, res) => {
+router.put('/product/:id', authorizeAdmin(['admin']), async (req, res) => {
     const product = await Product.findOne({_id: req.params.id});
 
     if (!product) res.status(404).send('No existe el producto');
 
     await product.updateOne(req.body);
 
-    return res.status(200).json("Producto actualizado");
+    return res.status(200).json(product);
 });
 
 module.exports = router;

@@ -11,7 +11,7 @@ import { CookieService } from "ngx-cookie-service";
 
 export class AuthService {
 
-  private url = 'http://localhost:3000/api'
+  private url = 'https://web-177j.onrender.com/api'
 
   constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) { }
 
@@ -27,8 +27,24 @@ export class AuthService {
     return this.http.post(this.url + '/request-password-reset', { email });
   }
 
-  resetPassword(email: string, password: string, token: string) {
-    return this.http.post(this.url + '/reset-password', { email, password, token });
+  resetPassword(email: string, newPassword: string, resetCode?: number) {
+    return this.http.post(this.url + '/reset-password', { email, newPassword, resetCode });
+  }
+
+  addProduct(product: any) {
+    return this.http.post(this.url + '/products/add', product);
+  }
+
+  updateProduct(id: string, productData: any) {
+    return this.http.put(this.url + `/product/${id}`, productData);
+  }
+
+  deleteProduct(id: string) {
+    return this.http.delete(this.url + `/product/${id}`);
+  }
+
+  getProducts() {
+    return this.http.get(this.url + '/products');
   }
 
   loggedIn() {
